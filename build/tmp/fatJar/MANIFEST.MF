@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Title: SeiBot
+Implementation-Version: 0.1-DEV
+Main-Class: de.seibushin.interactiveBot.Main
+

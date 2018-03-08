@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane id="bg" stylesheets="@../style/gui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../oMeter/frame.png" />
+         </image>
+         <StackPane.margin>
+            <Insets bottom="32.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fx:id="pointer" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
+         <image>
+            <Image url="@../oMeter/pointer.png" />
+         </image>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </ImageView>
+      <Group fx:id="hover" opacity="0.0" StackPane.alignment="TOP_RIGHT">
+         <children>
+            <ImageView fx:id="drag" fitHeight="60.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../oMeter/close.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="36.0" layoutX="36.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../oMeter/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="controls" opacity="0.0" StackPane.alignment="TOP_LEFT">
+         <children>
+            <ImageView fx:id="dec" fitHeight="60.0" fitWidth="36.0" onMouseClicked="#decrease" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../oMeter/left.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="add" fitHeight="60.0" fitWidth="36.0" layoutX="36.0" onMouseClicked="#increase" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../oMeter/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+   </children>
+</StackPane>

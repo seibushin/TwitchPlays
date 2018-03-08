@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane id="bg" alignment="TOP_LEFT" stylesheets="@../style/gui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/role_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="top" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#inc" pickOnBounds="true" preserveRatio="true" translateX="-212.0" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/top.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="jgl" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#inc" pickOnBounds="true" preserveRatio="true" translateX="-150.0" translateY="-150.0" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/jgl.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mid" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#inc" pickOnBounds="true" preserveRatio="true" translateY="-212.0" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="bot" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#inc" pickOnBounds="true" preserveRatio="true" translateX="150.0" translateY="-150.0" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/bot.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="sup" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#inc" pickOnBounds="true" preserveRatio="true" translateX="212.0" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/sup.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="fill" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#inc" pickOnBounds="true" preserveRatio="true" translateY="212.0" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/fill.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pos1" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" translateX="-55.0" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/role.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pos2" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" translateX="55.0" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/role.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lock" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#lock" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../roleSelect/lock_open.png" />
+         </image>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </ImageView>
+   </children>
+</StackPane>
