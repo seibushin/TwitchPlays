@@ -1,5 +1,5 @@
 group 'de.seibushin'
-version '0.1-DEV'
+version '0.2-DEV'
 
 apply plugin: 'java'
 

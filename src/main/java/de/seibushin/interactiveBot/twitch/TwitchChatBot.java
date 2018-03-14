@@ -11,6 +11,7 @@ import de.seibushin.interactiveBot.helper.JSONParser;
 import de.seibushin.interactiveBot.lol.LolRobot;
 import de.seibushin.interactiveBot.oMeter.OMeter;
 import de.seibushin.interactiveBot.lol.LoL;
+import de.seibushin.interactiveBot.pointBot.PointBot;
 import de.seibushin.interactiveBot.soundBot.SoundBot;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -82,19 +83,30 @@ public class TwitchChatBot extends ListenerAdapter {
     private void runCommand(GenericMessageEvent event) {
         String[] parts = event.getMessage().split(" ");
 
+        String user = event.getUser().getNick();
+
         switch (parts[0]) {
+            case "!point":
+                System.out.println("point");
+                int points = PointBot.getInstance().getPointsForViewer(user);
+
+                sendMessage(user + " you have " + points + " points!");
+                break;
             case "!sound":
-                System.out.println("sound");
-                // add to queue
-                // remove
-                if (parts.length > 1) {
-                    SoundBot.getInstance().addToPlayList(parts[1]);
+                if (SoundBot.getInstance().isRunning()) {
+                    System.out.println("sound");
+
+                    // add to queue
+                    // remove
+                    if (parts.length > 1) {
+                        SoundBot.getInstance().addToPlayList(parts[1], user);
+                    }
                 }
                 break;
             case "!speak":
                 System.out.println("speak");
                 if (parts.length > 1) {
-                    SoundBot.getInstance().speak(parts[1]);
+                    SoundBot.getInstance().speak(event.getMessage().replaceAll(".*? (.*)", "$1"), user);
                 }
                 break;
             case "!pick":
@@ -127,12 +139,15 @@ public class TwitchChatBot extends ListenerAdapter {
                 }
                 break;
             case "!q":
+                //@todo finish Keyboard robot
+                /*
                 System.out.println("Q");
                 if (parts.length > 1) {
                     System.out.println(event.getMessage().replaceFirst(".*? ", ""));
                     LolRobot.getInstance().execute(parts[1]);
                 }
                 break;
+                 */
         }
     }
 
@@ -172,7 +187,7 @@ public class TwitchChatBot extends ListenerAdapter {
         bot.sendIRC().message("#" + CHANNEL, message);
     }
 
-    public void startBot() {
+    public void start() {
         new Thread(() -> {
             try {
                 System.out.println("start bot");

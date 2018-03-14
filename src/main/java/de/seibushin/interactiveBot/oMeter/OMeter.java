@@ -32,7 +32,7 @@ public class OMeter {
 
     private static OMeter instance;
 
-    private Stage stage = new Stage();
+    private Stage stage;
 
     private volatile DoubleProperty value = new SimpleDoubleProperty();
 
@@ -50,6 +50,12 @@ public class OMeter {
     private Group controls;
 
     public OMeter() {
+
+    }
+
+    private void init() {
+        stage = new Stage();
+
         stage.setTitle("InteractiveBot - OMeter");
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
@@ -80,7 +86,7 @@ public class OMeter {
         }
 
         stage.setOnCloseRequest(event -> {
-            running = false;
+            System.out.println("close OMeter - onCloseRequest");
         });
     }
 
@@ -105,6 +111,9 @@ public class OMeter {
      */
     public void start() {
         running = true;
+
+        init();
+
         value.setValue(0);
         stage.show();
 
@@ -197,5 +206,7 @@ public class OMeter {
         }
         // close the stage
         stage.close();
+
+        running = false;
     }
 }

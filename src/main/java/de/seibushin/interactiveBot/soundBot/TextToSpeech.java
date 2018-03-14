@@ -114,7 +114,6 @@ public class TextToSpeech {
 
             ap.join();
 
-
             speaking.compareAndSet(true, false);
 
         } catch (Exception ex) {

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Implementation-Title: SeiBot
-Implementation-Version: 0.1-DEV
+Implementation-Version: 0.2-DEV
 Main-Class: de.seibushin.interactiveBot.Main
 

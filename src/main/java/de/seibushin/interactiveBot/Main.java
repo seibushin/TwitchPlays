@@ -8,6 +8,7 @@ package de.seibushin.interactiveBot;
 
 import de.seibushin.interactiveBot.lol.LoL;
 import de.seibushin.interactiveBot.oMeter.OMeter;
+import de.seibushin.interactiveBot.pointBot.PointBot;
 import de.seibushin.interactiveBot.soundBot.SoundBot;
 import de.seibushin.interactiveBot.twitch.TwitchChatBot;
 import javafx.application.Application;
@@ -42,8 +43,13 @@ public class Main extends Application {
     }
 
     @FXML
+    private void startPointBot() {
+        PointBot.getInstance().start();
+    }
+
+    @FXML
     private void startChatBot() {
-        TwitchChatBot.getInstance().startBot();
+        TwitchChatBot.getInstance().start();
     }
 
     @FXML
@@ -63,6 +69,8 @@ public class Main extends Application {
     }
 
     private void close() {
+        PointBot.getInstance().close();
+
         Platform.exit();
         // terminate process
         System.exit(0);

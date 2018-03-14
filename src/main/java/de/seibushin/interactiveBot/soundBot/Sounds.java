@@ -7,21 +7,27 @@
 
 package de.seibushin.interactiveBot.soundBot;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.HashMap;
 
 public class Sounds {
-    private static final String SOUND_DIR = "res/sounds";
+    private static final String SOUND_BASE = "res/sounds";
+    private static final String SOUND_FILE = SOUND_BASE + "/sounds.txt";
 
-    public static HashMap<String, String> getAll() {
-        HashMap<String, String> sounds = new HashMap<>();
+    public static HashMap<String, Integer> getAll() {
+        HashMap<String, Integer> sounds = new HashMap<>();
 
         try {
-            File dir = new File(SOUND_DIR);
+            try (BufferedReader br = new BufferedReader(new FileReader(new File(SOUND_FILE)))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] parts = line.split(" ");
 
-            if (dir.exists() && dir.isDirectory()) {
-                for (String f : dir.list()) {
-                    sounds.put(f.replaceAll("(.*?)\\..*", "$1"), SOUND_DIR + "/" + f);
+                    if (parts.length >= 2) {
+                        sounds.put(parts[0], Integer.parseInt(parts[1]));
+                    }
                 }
             }
         } catch (Exception e) {
