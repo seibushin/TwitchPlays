@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<HBox fx:id="cell" minHeight="-Infinity" styleClass="no-bg" stylesheets="@../style/gui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <StackPane>
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../circle_b.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="keyChar" text="a" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <Label fx:id="time" text="Label" />
+   </children>
+</HBox>

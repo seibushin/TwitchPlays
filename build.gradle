@@ -26,13 +26,17 @@ task fatJar(type: Jar) {
 repositories {
     mavenCentral()
     jcenter()
+    maven {
+        url "https://raw.github.com/kristian/system-hook/mvn-repo/"
+    }
 }
 
 dependencies {
     compile 'org.pircbotx:pircbotx:2.0.1'
     compile 'org.json:json:20090211'
     compile 'com.google.guava:guava:16+'
-    compile 'org.slf4j:slf4j-simple:1.6.1'
     compile 'de.dfki.mary:voice-cmu-slt-hsmm:5.2'
     compile 'de.dfki.mary:voice-bits1-hsmm:5.2'
+
+    compile 'lc.kra.system:system-hook:3.2'
 }

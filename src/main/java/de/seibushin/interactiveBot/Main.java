@@ -6,6 +6,7 @@ package de.seibushin.interactiveBot;
  *
  */
 
+import de.seibushin.interactiveBot.keyPresser.KeyBot;
 import de.seibushin.interactiveBot.lol.LoL;
 import de.seibushin.interactiveBot.oMeter.OMeter;
 import de.seibushin.interactiveBot.pointBot.PointBot;
@@ -40,6 +41,11 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> close());
+    }
+
+    @FXML
+    private void startKeyBot() {
+        KeyBot.getInstance().start();
     }
 
     @FXML

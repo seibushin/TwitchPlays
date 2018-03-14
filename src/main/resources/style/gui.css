@@ -1,3 +1,21 @@
 #bg {
-    -fx-background-color: #000000;
+    -fx-background-color: #fff;
+}
+
+.no-bg {
+    -fx-background-color: transparent;
+}
+
+.simple-list {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.simple-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-end-margin: 0;
+    -fx-start-margin: 0;
 }

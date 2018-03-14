@@ -45,9 +45,7 @@ public class SoundBot {
 
     private MaryInterface mary;
 
-
-
-    private final HashMap<String, Integer> sounds;
+    private  HashMap<String, Integer> sounds;
 
     private Stage stage;
 
@@ -64,16 +62,7 @@ public class SoundBot {
     private StackPane bubble;
 
     private SoundBot() {
-        try {
-            mary = new LocalMaryInterface();
-        } catch (MaryConfigurationException ex) {
-            ex.printStackTrace();
-        }
 
-        sounds = Sounds.getAll();
-        sounds.forEach((s, s2) -> {
-            System.out.println(s + " --- " + s2);
-        });
     }
 
     private void init() {
@@ -156,6 +145,19 @@ public class SoundBot {
 
     private void scheduler() {
         scheduler = new Thread(() -> {
+            try {
+                mary = new LocalMaryInterface();
+            } catch (MaryConfigurationException ex) {
+                ex.printStackTrace();
+            }
+
+            sounds = Sounds.getAll();
+            sounds.forEach((s, s2) -> {
+                System.out.println(s + " --- " + s2);
+            });
+            
+            playList.add("ready");
+
             while (running.get()) {
                 while (playing.get()) {
                     // wait
@@ -275,10 +277,6 @@ public class SoundBot {
 
         stage.close();
     }
-
-
-
-
 
     @Deprecated
     public synchronized void playSound(String soundName) {

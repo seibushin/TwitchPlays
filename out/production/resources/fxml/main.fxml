@@ -11,6 +11,7 @@
       <Button mnemonicParsing="false" onAction="#startLoL" text="Start Game" />
       <Button mnemonicParsing="false" onAction="#startOMeter" text="Start oMeter" />
       <Button mnemonicParsing="false" onAction="#startSound" text="Start Sound" />
+      <Button mnemonicParsing="false" onAction="#startKeyBot" text="Start KeyBot" />
       <ListView fx:id="audio_queue" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </VBox>
