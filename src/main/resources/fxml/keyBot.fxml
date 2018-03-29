@@ -1,12 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox id="bg" stylesheets="@../style/gui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="bg" alignment="CENTER" stylesheets="@../style/gui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="APM" />
-      <ListView fx:id="keys" styleClass="simple-list" />
+      <HBox alignment="CENTER" styleClass="no-bg">
+         <children>
+            <Label alignment="CENTER" text="APM" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="apm" text="0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" styleClass="no-bg">
+         <children>
+            <VBox alignment="TOP_CENTER" styleClass="no-bg" stylesheets="@../style/gui.css">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label text="Keyboard" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="apm_kb" text="0" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ListView fx:id="keys" prefWidth="100.0" styleClass="simple-list" />
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" styleClass="no-bg" stylesheets="@../style/gui.css">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label text="Mouse" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="apm_mouse" text="0" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ListView fx:id="mouse" prefWidth="100.0" styleClass="simple-list" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </VBox>

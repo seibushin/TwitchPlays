@@ -6,8 +6,8 @@ package de.seibushin.interactiveBot.lol.scene;
  *
  */
 
-import de.seibushin.interactiveBot.lol.Roles;
-import de.seibushin.interactiveBot.lol.LoL;
+import de.seibushin.interactiveBot.lol.LolBot;
+import de.seibushin.interactiveBot.lol.model.Roles;
 import de.seibushin.interactiveBot.helper.Pos;
 import de.seibushin.interactiveBot.helper.TPMath;
 import javafx.application.Platform;
@@ -213,7 +213,7 @@ public class RoleSelect {
                 Thread.sleep(1000);
                 // execute on FX Thread
                 Platform.runLater(() -> {
-                    LoL.getInstance().next();
+                    LolBot.getInstance().next();
                 });
 
             } catch (InterruptedException e) {

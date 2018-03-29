@@ -6,13 +6,14 @@ package de.seibushin.interactiveBot.twitch;
  *
  */
 
+import de.seibushin.interactiveBot.lol.LolBot;
 import de.seibushin.interactiveBot.oMeter.Words;
 import de.seibushin.interactiveBot.helper.JSONParser;
-import de.seibushin.interactiveBot.lol.LolRobot;
 import de.seibushin.interactiveBot.oMeter.OMeter;
-import de.seibushin.interactiveBot.lol.LoL;
 import de.seibushin.interactiveBot.pointBot.PointBot;
 import de.seibushin.interactiveBot.soundBot.SoundBot;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.pircbotx.Configuration;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TwitchChatBot extends ListenerAdapter {
+public class TwitchChatBot extends ListenerAdapter implements Runnable {
     private static TwitchChatBot instance;
 
     public static final String BOTNAME = "LoLPlayBot";
@@ -34,6 +35,8 @@ public class TwitchChatBot extends ListenerAdapter {
     public static final String CHANNEL = "seibushin";
 
     public static PircBotX bot;
+
+    private volatile BooleanProperty running = new SimpleBooleanProperty(false);
 
     //Mods usernames must be lowercase
     private List<String> mods = new ArrayList<>();
@@ -64,6 +67,10 @@ public class TwitchChatBot extends ListenerAdapter {
         return instance;
     }
 
+    public synchronized BooleanProperty isRunning() {
+        return running;
+    }
+
     /**
      * PircBotx will return the exact message sent and not the raw line
      */
@@ -86,14 +93,14 @@ public class TwitchChatBot extends ListenerAdapter {
         String user = event.getUser().getNick();
 
         switch (parts[0]) {
-            case "!point":
+            case "!points":
                 System.out.println("point");
                 int points = PointBot.getInstance().getPointsForViewer(user);
 
                 sendMessage(user + " you have " + points + " points!");
                 break;
             case "!sound":
-                if (SoundBot.getInstance().isRunning()) {
+                if (SoundBot.getInstance().isRunning().get()) {
                     System.out.println("sound");
 
                     // add to queue
@@ -112,7 +119,7 @@ public class TwitchChatBot extends ListenerAdapter {
             case "!pick":
                 System.out.println("pick");
                 if (parts.length > 1) {
-                    LoL.getInstance().pick(parts[1]);
+                    LolBot.getInstance().pick(parts[1]);
                 }
                 break;
             case "!raffle":
@@ -157,7 +164,7 @@ public class TwitchChatBot extends ListenerAdapter {
      * @param event
      */
     private void runAction(GenericMessageEvent event) {
-        if (OMeter.getInstance().isRunning()) {
+        if (OMeter.getInstance().isRunning().get()) {
             System.out.println("OMeter check");
             String[] parts = event.getMessage().split(" ");
 
@@ -187,14 +194,31 @@ public class TwitchChatBot extends ListenerAdapter {
         bot.sendIRC().message("#" + CHANNEL, message);
     }
 
-    public void start() {
-        new Thread(() -> {
-            try {
-                System.out.println("start bot");
-                bot.startBot();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+    public synchronized void start() {
+        if (!running.get()) {
+            System.out.println("Start PointBot");
+            running.set(true);
+
+            new Thread(this).start();
+        }
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println("start bot");
+            bot.startBot();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public synchronized void close() {
+        if (running.get()) {
+            System.out.println("Close PointBot");
+            bot.stopBotReconnect();
+            bot.sendIRC().quitServer("bye");
+            running.set(false);
+        }
     }
 }

@@ -1,27 +1,15 @@
-group 'de.seibushin'
-version '0.2-DEV'
+plugins {
+    id 'application'
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '2.0.3'
+}
 
-apply plugin: 'java'
+group 'de.seibushin'
+version '0.3-DEV'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'de.seibushin.interactiveBot.Main'
-    }
-}
-
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Implementation-Title': 'SeiBot',
-                'Implementation-Version': version,
-                'Main-Class': 'de.seibushin.interactiveBot.Main'
-    }
-    baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
+mainClassName = 'de.seibushin.interactiveBot.Main'
 
 repositories {
     mavenCentral()
@@ -31,12 +19,16 @@ repositories {
     }
 }
 
+shadowJar {
+    classifier = ''
+    mergeServiceFiles()
+}
+
 dependencies {
     compile 'org.pircbotx:pircbotx:2.0.1'
     compile 'org.json:json:20090211'
     compile 'com.google.guava:guava:16+'
     compile 'de.dfki.mary:voice-cmu-slt-hsmm:5.2'
     compile 'de.dfki.mary:voice-bits1-hsmm:5.2'
-
     compile 'lc.kra.system:system-hook:3.2'
 }

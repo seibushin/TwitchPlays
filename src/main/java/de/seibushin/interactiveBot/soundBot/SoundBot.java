@@ -7,10 +7,12 @@
 
 package de.seibushin.interactiveBot.soundBot;
 
-import de.seibushin.interactiveBot.helper.GuiHelper;
 import de.seibushin.interactiveBot.pointBot.PointBot;
-import javafx.application.Application;
+import de.seibushin.interactiveBot.soundBot.model.Sound;
+import de.seibushin.interactiveBot.soundBot.model.Sounds;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,9 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import marytts.LocalMaryInterface;
 import marytts.MaryInterface;
 import marytts.exceptions.MaryConfigurationException;
@@ -34,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @SuppressWarnings("Duplicates")
 public class SoundBot {
@@ -45,14 +44,12 @@ public class SoundBot {
 
     private MaryInterface mary;
 
-    private  HashMap<String, Integer> sounds;
-
     private Stage stage;
 
     private AtomicBoolean playing = new AtomicBoolean(false);
-    private AtomicBoolean running = new AtomicBoolean(false);
+    private volatile BooleanProperty running = new SimpleBooleanProperty(false);
 
-    private final List<String> playList = new ArrayList<>();
+    private final List<Sound> playList = new ArrayList<>();
 
     private Thread scheduler;
 
@@ -68,7 +65,7 @@ public class SoundBot {
     private void init() {
         stage = new Stage();
 
-        stage.setTitle("InteractiveBot - SoundBot");
+        stage.setTitle("SeiBot - SoundBot");
         stage.setResizable(false);
         //stage.initStyle(StageStyle.UNDECORATED);
 
@@ -84,6 +81,8 @@ public class SoundBot {
         }
 
         stage.setOnCloseRequest(event -> close());
+
+        stage.show();
     }
 
     public synchronized static SoundBot getInstance() {
@@ -93,20 +92,20 @@ public class SoundBot {
         return instance;
     }
 
-    public boolean isRunning() {
-        return running.get();
+    public BooleanProperty isRunning() {
+        return running;
     }
 
     public synchronized void addToPlayList(String soundName, String user) {
-        int cost = sounds.getOrDefault(soundName, -1);
+        Sound sound = Sounds.getSound(soundName);
 
-        if (cost > -1) {
+        if (sound != null) {
             int points = PointBot.getInstance().getPointsForViewer(user);
 
-            if (points >= cost) {
-                PointBot.getInstance().addPointToViewer(user, -cost);
+            if (points >= sound.getCost()) {
+                PointBot.getInstance().addPointToViewer(user, -sound.getCost());
                 System.out.println("add to playlist " + soundName);
-                playList.add(soundName);
+                playList.add(sound);
             }
         }
     }
@@ -114,7 +113,7 @@ public class SoundBot {
     private void setBubbleText(String msg) {
         Platform.runLater(() -> {
             bubble.setVisible(true);
-            text.setText(msg + "!");
+            text.setText(msg);
         });
     }
 
@@ -128,16 +127,16 @@ public class SoundBot {
     public synchronized void playNextSound() {
         if (playList.size() > 0 && playing.compareAndSet(false, true)) {
             System.out.println("Sound ready");
-            String soundName = playList.remove(0);
+            Sound sound = playList.remove(0);
 
-            setBubbleText(soundName);
+            setBubbleText(sound.getMsg());
 
             // play sound
-            Media sound = new Media(new File(SOUND_BASE + soundName + ".mp3").toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            Media media = new Media(new File(SOUND_BASE + sound.getKey() + ".mp3").toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setOnEndOfMedia(() -> {
                 hideBubble();
-                    });
+            });
 
             mediaPlayer.play();
         }
@@ -147,16 +146,18 @@ public class SoundBot {
         scheduler = new Thread(() -> {
             try {
                 mary = new LocalMaryInterface();
+
+                mary.getAvailableLocales().forEach(locale -> {
+                    System.out.println(locale);
+                });
+
+                mary.getAvailableVoices().forEach(s -> {
+                    System.out.println(s);
+                });
+
             } catch (MaryConfigurationException ex) {
                 ex.printStackTrace();
             }
-
-            sounds = Sounds.getAll();
-            sounds.forEach((s, s2) -> {
-                System.out.println(s + " --- " + s2);
-            });
-            
-            playList.add("ready");
 
             while (running.get()) {
                 while (playing.get()) {
@@ -169,11 +170,11 @@ public class SoundBot {
         scheduler.start();
     }
 
-    public void start() {
-        if (running.compareAndSet(false, true)) {
-            init();
+    public synchronized void start() {
+        if (!running.get()) {
+            running.set(true);
 
-            stage.show();
+            init();
 
             // start scheduler
             scheduler();
@@ -181,7 +182,7 @@ public class SoundBot {
     }
 
     public void speak(String msg, String user) {
-        int cost = 5;
+        int cost = 10;
         int points = PointBot.getInstance().getPointsForViewer(user);
 
         if (points >= cost) {
@@ -195,7 +196,7 @@ public class SoundBot {
 
     private void say(String input, String voice) {
         try {
-            while (!playing.compareAndSet(false,true)) {
+            while (!playing.compareAndSet(false, true)) {
                 // wait
             }
             AudioPlayer ap = new AudioPlayer();
@@ -268,19 +269,20 @@ public class SoundBot {
             hideBubble();
         } catch (Exception ex) {
             System.err.println("Error saying phrase.");
+            System.err.println(ex);
         }
     }
 
-
-    private void close() {
-        running.compareAndSet(true, false);
-
-        stage.close();
+    public synchronized void close() {
+        if (running.get()) {
+            running.set(false);
+            stage.close();
+        }
     }
 
     @Deprecated
     public synchronized void playSound(String soundName) {
-        if (sounds.containsKey(soundName)) {
+        if (Sounds.getSound(soundName) != null) {
             text.setText(soundName);
             try {
 

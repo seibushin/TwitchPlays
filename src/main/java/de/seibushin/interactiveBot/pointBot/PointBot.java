@@ -8,6 +8,8 @@
 package de.seibushin.interactiveBot.pointBot;
 
 import de.seibushin.interactiveBot.helper.JSONParser;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,16 +23,16 @@ public class PointBot implements Runnable {
     private static final long INTERVAL = 5; // minutes
     private static final String CHANNEL = "seibushin";
     private static final String SAVEFILE = "res/points.txt";
-    private static final String SPLITTER = " _§_ ";
+    private static final String SPLITTER = ";";
 
-    private AtomicBoolean running = new AtomicBoolean(false);
+    private volatile BooleanProperty running = new SimpleBooleanProperty(false);
 
     private static PointBot instance;
 
     private volatile HashMap<String, Integer> pointMap = new HashMap<>();
 
     public PointBot() {
-        load();
+
     }
 
     /**
@@ -46,18 +48,25 @@ public class PointBot implements Runnable {
         return instance;
     }
 
+    public synchronized BooleanProperty isRunning() {
+        return running;
+    }
+
     /**
      * Start the pointBot in a seperate thread
      */
-    public void start() {
-        if (running.compareAndSet(false, true)) {
+    public synchronized void start() {
+        if (!running.get()) {
             System.out.println("Start PointBot");
+            running.set(true);
             new Thread(this).start();
         }
     }
 
     @Override
     public void run() {
+        load();
+
         while (running.get()) {
             try {
                 TimeUnit.MINUTES.sleep(INTERVAL);
@@ -77,10 +86,10 @@ public class PointBot implements Runnable {
         try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVEFILE)))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
                 String[] parts = line.split(SPLITTER);
 
                 if (parts.length >= 2) {
+                    System.out.println(parts[0] + "->" + parts[1]);
                     pointMap.put(parts[0], Integer.parseInt(parts[1]));
                 }
             }
@@ -91,10 +100,12 @@ public class PointBot implements Runnable {
         }
     }
 
-    public void close() {
-        save();
-
-        running.compareAndSet(true, false);
+    public synchronized void close() {
+        if (running.get()) {
+            System.out.println("Close PointBot");
+            running.set(false);
+            save();
+        }
     }
 
     /**

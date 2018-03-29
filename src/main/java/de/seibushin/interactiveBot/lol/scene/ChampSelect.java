@@ -6,7 +6,7 @@ package de.seibushin.interactiveBot.lol.scene;
  *
  */
 
-import de.seibushin.interactiveBot.lol.ChampVote;
+import de.seibushin.interactiveBot.lol.model.ChampVote;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;

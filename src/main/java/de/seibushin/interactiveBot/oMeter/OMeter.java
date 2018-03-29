@@ -8,7 +8,9 @@
 package de.seibushin.interactiveBot.oMeter;
 
 import de.seibushin.interactiveBot.helper.GuiHelper;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,12 +33,10 @@ public class OMeter {
     private static final int NORMALIZER_MAX = 8;
 
     private static OMeter instance;
-
     private Stage stage;
 
     private volatile DoubleProperty value = new SimpleDoubleProperty();
-
-    private boolean running = false;
+    private volatile BooleanProperty running = new SimpleBooleanProperty(false);
 
     private Thread normalizer;
 
@@ -56,7 +56,7 @@ public class OMeter {
     private void init() {
         stage = new Stage();
 
-        stage.setTitle("InteractiveBot - OMeter");
+        stage.setTitle("SeiBot - OMeter");
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
 
@@ -88,6 +88,10 @@ public class OMeter {
         stage.setOnCloseRequest(event -> {
             System.out.println("close OMeter - onCloseRequest");
         });
+
+        stage.show();
+
+        value.setValue(0);
     }
 
     /**
@@ -102,22 +106,21 @@ public class OMeter {
         return instance;
     }
 
-    public boolean isRunning() {
+    public BooleanProperty isRunning() {
         return running;
     }
 
     /**
      * Start the widget
      */
-    public void start() {
-        running = true;
+    public synchronized void start() {
+        if (!running.get()) {
+            running.set(true);
 
-        init();
+            init();
 
-        value.setValue(0);
-        stage.show();
-
-        startNormalizer();
+            startNormalizer();
+        }
     }
 
     /**
@@ -196,17 +199,19 @@ public class OMeter {
     }
 
     @FXML
-    private void close() {
-        try {
-            normalizer.interrupt();
-            // Wait for the thread to die
-            normalizer.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        // close the stage
-        stage.close();
+    public synchronized void close() {
+        if (running.get()) {
+            running.set(false);
 
-        running = false;
+            try {
+                normalizer.interrupt();
+                // Wait for the thread to die
+                normalizer.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            // close the stage
+            stage.close();
+        }
     }
 }

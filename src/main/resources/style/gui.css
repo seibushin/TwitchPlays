@@ -1,5 +1,5 @@
 #bg {
-    -fx-background-color: #fff;
+    -fx-background-color: #000000;
 }
 
 .no-bg {
@@ -18,4 +18,27 @@
     -fx-padding: 0;
     -fx-end-margin: 0;
     -fx-start-margin: 0;
+}
+
+.toggle {
+    -fx-background-color: transparent;
+}
+
+.status {
+    -fx-label-padding: 0;
+}
+
+.status .radio {
+    -fx-background-color: transparent;
+    -fx-background-position: center;
+    -fx-background-image: url("toggle_1.png");
+    -fx-background-size: 15px;
+}
+
+.status:selected .radio {
+    -fx-background-image: url("toggle_2.png");
+}
+
+.status .radio .dot {
+    -fx-background-color: transparent;
 }

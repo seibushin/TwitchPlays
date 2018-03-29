@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox id="bg" fx:id="wrapper" alignment="CENTER" stylesheets="@../style/gui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="apm" text="APM " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <HBox>
+         <children>
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <Label fx:id="apm_kb" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Keyboard " textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font></Label>
+                  <HBox>
+                     <children>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key220" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label alignment="TOP_LEFT" contentDisplay="CENTER" text="^ " textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key49" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar1" alignment="TOP_LEFT" contentDisplay="CENTER" text="1" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key50" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar11" alignment="TOP_LEFT" contentDisplay="CENTER" text="2" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key51" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar112" alignment="TOP_LEFT" contentDisplay="CENTER" text="3" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key52" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar122" alignment="TOP_LEFT" contentDisplay="CENTER" text="4" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key53" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar1221" alignment="TOP_LEFT" contentDisplay="CENTER" text="5" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key9" fitHeight="50.0" fitWidth="80.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../style/space.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                              <Label fx:id="keyChar2" alignment="TOP_LEFT" contentDisplay="CENTER" text="↹" textFill="WHITE" translateX="20.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                         <StackPane>
+                             <children>
+                                 <ImageView fx:id="key81" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                     <image>
+                                         <Image url="@../style/key.png" />
+                                     </image>
+                                 </ImageView>
+                                 <Label fx:id="keyChar" alignment="TOP_LEFT" contentDisplay="CENTER" text="Q" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                     <font>
+                                         <Font size="16.0" />
+                                     </font>
+                              </Label>
+                             </children>
+                         </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key87" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar1131" alignment="TOP_LEFT" contentDisplay="CENTER" text="W" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key69" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar1212" alignment="TOP_LEFT" contentDisplay="CENTER" text="E" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key82" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar12" alignment="TOP_LEFT" contentDisplay="CENTER" text="R" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key20" fitHeight="50.0" fitWidth="95.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../style/space.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar14" alignment="TOP_LEFT" contentDisplay="CENTER" text="⇩" textFill="WHITE" translateX="20.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key65" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar1" alignment="TOP_LEFT" contentDisplay="CENTER" text="A" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key83" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar11" alignment="TOP_LEFT" contentDisplay="CENTER" text="S" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key68" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar111" alignment="TOP_LEFT" contentDisplay="CENTER" text="D" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key70" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar121" alignment="TOP_LEFT" contentDisplay="CENTER" text="F" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key160" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar113" alignment="TOP_LEFT" contentDisplay="CENTER" text="⇧" textFill="WHITE" translateX="20.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key226" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar114" alignment="TOP_LEFT" contentDisplay="CENTER" text="&lt; |" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key89" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar11" alignment="TOP_LEFT" contentDisplay="CENTER" text="Y" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key88" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar111" alignment="TOP_LEFT" contentDisplay="CENTER" text="X" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key67" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar1111" alignment="TOP_LEFT" contentDisplay="CENTER" text="C" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key86" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar1211" alignment="TOP_LEFT" contentDisplay="CENTER" text="V" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key162" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label alignment="TOP_LEFT" contentDisplay="CENTER" text="Strg" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key91" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar1111" alignment="TOP_LEFT" contentDisplay="CENTER" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key164" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../style/key.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar11111" alignment="TOP_LEFT" contentDisplay="CENTER" text="Alt" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="key32" fitHeight="50.0" fitWidth="200.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../style/space.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="keyChar12111" alignment="TOP_LEFT" contentDisplay="CENTER" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <Label fx:id="apm_mouse" text="Mouse " textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font></Label>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../style/mouse_layout.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="mouse16" pickOnBounds="true" preserveRatio="true" translateX="-1.0" translateY="-38.0">
+                           <image>
+                              <Image url="@../style/middle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="mouse1" pickOnBounds="true" preserveRatio="true" translateX="-46.0" translateY="-45.0">
+                           <image>
+                              <Image url="@../style/left.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="mouse2" pickOnBounds="true" preserveRatio="true" translateX="44.0" translateY="-45.0">
+                           <image>
+                              <Image url="@../style/right.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </StackPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
