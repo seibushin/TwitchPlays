@@ -21,15 +21,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PointBot implements Runnable {
-    private static final long INTERVAL = Config.getInstance().getDisEveryMin();
-    private static final int ADD_PER_INT = Config.getInstance().getPointsPerDis();
-    private static final String CHANNEL = "seibushin";
+    private long INTERVAL;
+    private int ADD_PER_INT;
+    private String CHANNEL;
 
     private static final String SAVEFILE = "res/points.txt";
     private static final String SPLITTER = ";";
 
     private volatile BooleanProperty running = new SimpleBooleanProperty(false);
-
     private static PointBot instance;
 
     private volatile HashMap<String, Integer> pointMap = new HashMap<>();
@@ -62,8 +61,17 @@ public class PointBot implements Runnable {
         if (!running.get()) {
             System.out.println("Start PointBot");
             running.set(true);
+
+            getConfig();
+
             new Thread(this).start();
         }
+    }
+
+    private void getConfig() {
+        INTERVAL = Config.getInstance().getDisEveryMin();
+        ADD_PER_INT = Config.getInstance().getPointsPerDis();
+        CHANNEL = Config.getInstance().getChannel();
     }
 
     @Override

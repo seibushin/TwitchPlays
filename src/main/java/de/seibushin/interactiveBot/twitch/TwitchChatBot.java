@@ -18,7 +18,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
+import org.pircbotx.hooks.Event;
 import org.pircbotx.hooks.ListenerAdapter;
+import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PingEvent;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
@@ -75,7 +77,7 @@ public class TwitchChatBot extends ListenerAdapter implements Runnable {
      * PircBotx will return the exact message sent and not the raw line
      */
     @Override
-    public void onGenericMessage(GenericMessageEvent event) throws Exception {
+    public void onGenericMessage(GenericMessageEvent event) {
         if (event.getMessage().startsWith("!")) {
             runCommand(event);
         } else {
@@ -113,7 +115,7 @@ public class TwitchChatBot extends ListenerAdapter implements Runnable {
             case "!speak":
                 System.out.println("speak");
                 if (parts.length > 1) {
-                    SoundBot.getInstance().speak(event.getMessage().replaceAll(".*? (.*)", "$1"), user);
+                    SoundBot.getInstance().addSpeak(event.getMessage().replaceAll(".*? (.*)", "$1"), user);
                 }
                 break;
             case "!pick":

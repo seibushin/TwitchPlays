@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
@@ -119,8 +121,17 @@
                      <children>
                         <VBox>
                            <children>
+                              <Label text="Background Color" />
+                              <ColorPicker fx:id="soundBot_bg" />
                               <Label text="Speak cost" />
-                              <TextField fx:id="speakCost" />
+                              <TextField fx:id="soundBot_speakCost" />
+                              <Label text="Command" />
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="soundBot_command" />
+                                    <Button mnemonicParsing="false" onAction="#soundBotCommand" text="Go" />
+                                 </children>
+                              </HBox>
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -134,6 +145,18 @@
                   <AnchorPane>
                      <children>
                         <VBox>
+                           <children>
+                              <Label text="Control Color" />
+                              <ColorPicker fx:id="apm_color" />
+                              <Label text="Control Text Color" />
+                              <ColorPicker fx:id="apm_textColor" />
+                              <Label text="Background" />
+                              <ColorPicker fx:id="apm_bg" />
+                              <Label text="Main Text Color" />
+                              <ColorPicker fx:id="apm_mainTextColor" />
+                              <CheckBox fx:id="apm_showKey" mnemonicParsing="false" text="Show Keyboard" />
+                              <CheckBox fx:id="apm_showMouse" mnemonicParsing="false" text="Show Mouse" />
+                           </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>

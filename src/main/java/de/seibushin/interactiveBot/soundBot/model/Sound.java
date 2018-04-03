@@ -18,6 +18,10 @@ public class Sound {
         this.msg = parts[2];
     }
 
+    public Sound(String msg) {
+        this.msg = msg;
+    }
+
     public String getKey() {
         return key;
     }

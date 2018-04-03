@@ -30,10 +30,13 @@ public class Config {
     private StringProperty oMeter_max = new SimpleStringProperty("8");
     private StringProperty oMeter_min = new SimpleStringProperty("0.025");
     // SoundBot
-    private StringProperty speakCost = new SimpleStringProperty("10");
+    private StringProperty soundBot_speakCost = new SimpleStringProperty("10");
+    private ObjectProperty<Color> soundBot_bg = new SimpleObjectProperty<>(Color.web("#000000"));
     // apmBot
     private ObjectProperty<Color> apm_color = new SimpleObjectProperty<>(Color.web("#ff0000"));
+    private ObjectProperty<Color> apm_textColor = new SimpleObjectProperty<>(Color.web("#ffffff"));
     private ObjectProperty<Color> apm_bg = new SimpleObjectProperty<>(Color.web("#000000"));
+    private ObjectProperty<Color> apm_mainTextColor = new SimpleObjectProperty<>(Color.web("#ffffff"));
     private BooleanProperty apm_showKey = new SimpleBooleanProperty(true);
     private BooleanProperty apm_showMouse = new SimpleBooleanProperty(true);
 
@@ -65,8 +68,11 @@ public class Config {
                         case "pointsPerDis":
                             pointsPerDis.set(parts[1]);
                             break;
-                        case "speakCost":
-                            speakCost.set(parts[1]);
+                        case "soundBot_speakCost":
+                            soundBot_speakCost.set(parts[1]);
+                            break;
+                        case "soundBot_bg":
+                            soundBot_bg.set(Color.web(parts[1]));
                             break;
                         case "oMeter_factor":
                             oMeter_factor.set(parts[1]);
@@ -94,6 +100,12 @@ public class Config {
                             break;
                         case "apm_showMouse":
                             apm_showMouse.set(Boolean.valueOf(parts[1]));
+                            break;
+                        case "apm_textColor":
+                            apm_textColor.set(Color.web(parts[1]));
+                            break;
+                        case "apm_mainTextColor":
+                            apm_mainTextColor.set(Color.web(parts[1]));
                             break;
                     }
                 }
@@ -139,17 +151,25 @@ public class Config {
         return pointsPerDis;
     }
 
-    public int getSpeakCost() {
+    public int getSoundBot_speakCost() {
         try {
-            return Integer.parseInt(speakCost.get());
+            return Integer.parseInt(soundBot_speakCost.get());
         } catch (NumberFormatException e) {
-            // ignore
+            //ignore
         }
         return 0;
     }
 
-    public StringProperty speakCostProperty() {
-        return speakCost;
+    public StringProperty soundBot_speakCostProperty() {
+        return soundBot_speakCost;
+    }
+
+    public String getSoundBot_bg() {
+        return soundBot_bg.get().toString().replaceFirst("0x", "#");
+    }
+
+    public ObjectProperty<Color> soundBot_bgProperty() {
+        return soundBot_bg;
     }
 
     public double getoMeter_factor() {
@@ -218,7 +238,7 @@ public class Config {
     }
 
     public String getApm_color() {
-        return apm_color.get().toString();
+        return apm_color.get().toString().replaceFirst("0x", "#");
     }
 
     public ObjectProperty<Color> apm_colorProperty() {
@@ -226,7 +246,7 @@ public class Config {
     }
 
     public String getApm_bg() {
-        return apm_bg.get().toString();
+        return apm_bg.get().toString().replaceFirst("0x", "#");
     }
 
     public ObjectProperty<Color> apm_bgProperty() {
@@ -249,12 +269,29 @@ public class Config {
         return apm_showMouse;
     }
 
+    public String getApm_textColor() {
+        return apm_textColor.get().toString().replaceFirst("0x", "#");
+    }
+
+    public ObjectProperty<Color> apm_textColorProperty() {
+        return apm_textColor;
+    }
+
+    public String getApm_mainTextColor() {
+        return apm_mainTextColor.get().toString().replaceFirst("0x", "#");
+    }
+
+    public ObjectProperty<Color> apm_mainTextColorProperty() {
+        return apm_mainTextColor;
+    }
+
     public void close() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(CONFIG_FILE)))) {
             bw.write("channel=" + channel.get() + "\r\n");
             bw.write("disEveryMin=" + disEveryMin.get() + "\r\n");
             bw.write("pointsPerDis=" + pointsPerDis.get() + "\r\n");
-            bw.write("speakCost=" + speakCost.get() + "\r\n");
+            bw.write("soundBot_speakCost=" + soundBot_speakCost.get() + "\r\n");
+            bw.write("soundBot_bg=" + soundBot_bg.get().toString() + "\r\n");
             bw.write("oMeter_factor=" + oMeter_factor.get() +"\r\n");
             bw.write("oMeter_normSleep=" + oMeter_normSleep.get() +"\r\n");
             bw.write("oMeter_normFactor=" + oMeter_normFactor.get() +"\r\n");
@@ -264,6 +301,8 @@ public class Config {
             bw.write("apm_bg=" + apm_bg.get().toString() + "\r\n");
             bw.write("apm_showKey=" + apm_showKey.get() + "\r\n");
             bw.write("apm_showMouse=" + apm_showMouse.get() + "\r\n");
+            bw.write("apm_textColor=" + apm_textColor.get().toString() + "\r\n");
+            bw.write("apm_mainTextColor=" + apm_mainTextColor.get().toString() + "\r\n");
             bw.flush();
         } catch (IOException e) {
             e.printStackTrace();

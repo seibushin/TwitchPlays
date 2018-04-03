@@ -27,11 +27,12 @@ import java.io.IOException;
 public class OMeter {
     private static final String FXML_PATH = "/fxml/oMeter.fxml";
 
-    private static final double FACTOR = Config.getInstance().getoMeter_factor();
-    private static final int NORMALIZER_SLEEP = Config.getInstance().getoMeter_normSleep();
-    private static final double NORMALIZER_FACTOR = Config.getInstance().getoMeter_factor();
-    private static final double NORMALIZER_MIN = Config.getInstance().getoMeter_min();
-    private static final int NORMALIZER_MAX = Config.getInstance().getoMeter_max();
+    // config
+    private double FACTOR;
+    private int NORMALIZER_SLEEP;
+    private double NORMALIZER_FACTOR;
+    private double NORMALIZER_MIN;
+    private int NORMALIZER_MAX;
 
     private static OMeter instance;
     private Stage stage;
@@ -121,10 +122,19 @@ public class OMeter {
             System.out.println("start oMeter");
             running.set(true);
 
+            getConfig();
             init();
 
             startNormalizer();
         }
+    }
+
+    private void getConfig() {
+        FACTOR = Config.getInstance().getoMeter_factor();
+        NORMALIZER_SLEEP = Config.getInstance().getoMeter_normSleep();
+        NORMALIZER_FACTOR = Config.getInstance().getoMeter_factor();
+        NORMALIZER_MIN = Config.getInstance().getoMeter_min();
+        NORMALIZER_MAX = Config.getInstance().getoMeter_max();
     }
 
     /**

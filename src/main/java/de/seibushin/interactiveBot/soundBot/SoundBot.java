@@ -40,7 +40,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class SoundBot {
     private final static String FXML_PATH = "/fxml/soundBot.fxml";
     private static final String SOUND_BASE = "res/sounds/";
-    private static final int COST_SPEAK = Config.getInstance().getSpeakCost();
+
+    // config
+    private int COST_SPEAK;
 
     private static SoundBot instance;
 
@@ -55,6 +57,8 @@ public class SoundBot {
 
     private Thread scheduler;
 
+    @FXML
+    private StackPane wrapper;
     @FXML
     private Label text;
     @FXML
@@ -85,6 +89,12 @@ public class SoundBot {
         stage.setOnCloseRequest(event -> close());
 
         stage.show();
+
+        useConfig();
+    }
+
+    private void useConfig() {
+        wrapper.setStyle("-fx-background-color: " + Config.getInstance().getSoundBot_bg());
     }
 
     public synchronized static SoundBot getInstance() {
@@ -109,7 +119,11 @@ public class SoundBot {
                 System.out.println("add to playlist " + soundName);
                 playList.add(sound);
             } else {
-                TwitchChatBot.getInstance().sendMessage(user + " du hast " + points + " brauchst aber " + sound.getCost() + " Punkte!");
+                try {
+                    TwitchChatBot.getInstance().sendMessage(user + " du hast " + points + " brauchst aber " + sound.getCost() + " Punkte!");
+                } catch (Exception e) {
+                    System.out.println(user + " du hast " + points + " brauchst aber " + sound.getCost() + " Punkte!");
+                }
             }
         }
     }
@@ -135,14 +149,19 @@ public class SoundBot {
 
             setBubbleText(sound.getMsg());
 
-            // play sound
-            Media media = new Media(new File(SOUND_BASE + sound.getKey() + ".mp3").toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setOnEndOfMedia(() -> {
-                hideBubble();
-            });
+            if (sound.getKey() == null) {
+                // speak
+                say(sound.getMsg(), "de");
+            } else {
+                // play sound
+                Media media = new Media(new File(SOUND_BASE + sound.getKey() + ".mp3").toURI().toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.setOnEndOfMedia(() -> {
+                    hideBubble();
+                });
 
-            mediaPlayer.play();
+                mediaPlayer.play();
+            }
         }
     }
 
@@ -178,6 +197,7 @@ public class SoundBot {
         if (!running.get()) {
             running.set(true);
 
+            getConfig();
             init();
 
             // start scheduler
@@ -185,7 +205,29 @@ public class SoundBot {
         }
     }
 
-    public void speak(String msg, String user) {
+    private void getConfig() {
+        COST_SPEAK = Config.getInstance().getSoundBot_speakCost();
+    }
+
+    public void addSpeak(String msg, String user) {
+        if (!"".equals(msg)) {
+            int points = PointBot.getInstance().getPointsForViewer(user);
+
+            if (points >= COST_SPEAK) {
+                PointBot.getInstance().addPointToViewer(user, -COST_SPEAK);
+                System.out.println("add to playlist [speak]" + msg);
+                playList.add(new Sound(msg));
+            } else {
+                try {
+                    TwitchChatBot.getInstance().sendMessage(user + " du hast " + points + " brauchst aber " + COST_SPEAK + " Punkte!");
+                } catch (Exception e) {
+                    System.out.println(user + " du hast " + points + " brauchst aber " + COST_SPEAK + " Punkte!");
+                }
+            }
+        }
+    }
+
+    private void speak(String msg, String user) {
         int points = PointBot.getInstance().getPointsForViewer(user);
 
         if (points >= COST_SPEAK) {
@@ -201,9 +243,6 @@ public class SoundBot {
 
     private void say(String input, String voice) {
         try {
-            while (!playing.compareAndSet(false, true)) {
-                // wait
-            }
             AudioPlayer ap = new AudioPlayer();
 
             try {
@@ -282,27 +321,6 @@ public class SoundBot {
         if (running.get()) {
             running.set(false);
             stage.close();
-        }
-    }
-
-    @Deprecated
-    public synchronized void playSound(String soundName) {
-        if (Sounds.getSound(soundName) != null) {
-            text.setText(soundName);
-            try {
-
-                Media sound = new Media(new File(SOUND_BASE + soundName + ".mp3").toURI().toString());
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.play();
-
-                mediaPlayer.setOnEndOfMedia(() -> {
-                    System.out.println("end of media");
-                    stage.hide();
-                    // reset
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 }

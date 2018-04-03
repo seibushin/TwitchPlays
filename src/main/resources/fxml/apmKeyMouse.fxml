@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="bg" alignment="CENTER" stylesheets="@../style/gui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="bg" fx:id="wrapper" alignment="TOP_CENTER" stylesheets="@../style/gui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="apm" text="APM " textFill="WHITE">
+      <Label fx:id="apm" minWidth="103.0" styleClass="apm-main-label" text="APM " textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Label>
@@ -20,10 +20,13 @@
          <children>
             <VBox fx:id="apm_keyboardWrapper" alignment="TOP_CENTER">
                <children>
-                  <Label fx:id="apm_kb" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Keyboard " textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="apm_kb" alignment="TOP_LEFT" contentDisplay="RIGHT" minWidth="131.0" styleClass="apm-main-label" text="Keyboard " textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="20.0" />
-                     </font></Label>
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Label>
                   <HBox>
                      <children>
                         <StackPane>
@@ -33,7 +36,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label alignment="TOP_LEFT" contentDisplay="CENTER" text="^ " textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="^ " textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -47,7 +50,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar1" alignment="TOP_LEFT" contentDisplay="CENTER" text="1" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar1" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="1" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -61,7 +64,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar11" alignment="TOP_LEFT" contentDisplay="CENTER" text="2" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar11" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="2" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -75,7 +78,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar112" alignment="TOP_LEFT" contentDisplay="CENTER" text="3" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar112" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="3" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -89,7 +92,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar122" alignment="TOP_LEFT" contentDisplay="CENTER" text="4" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar122" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="4" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -102,7 +105,7 @@
                                  <image>
                                     <Image url="@../style/key.png" />
                                  </image></ImageView>
-                              <Label fx:id="keyChar1221" alignment="TOP_LEFT" contentDisplay="CENTER" text="5" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar1221" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="5" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -126,7 +129,7 @@
                                     <Rectangle2D />
                                  </viewport>
                               </ImageView>
-                              <Label fx:id="keyChar2" alignment="TOP_LEFT" contentDisplay="CENTER" text="↹" textFill="WHITE" translateX="20.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar2" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="↹" textFill="WHITE" translateX="20.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -140,7 +143,7 @@
                                          <Image url="@../style/key.png" />
                                      </image>
                                  </ImageView>
-                                 <Label fx:id="keyChar" alignment="TOP_LEFT" contentDisplay="CENTER" text="Q" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                                 <Label fx:id="keyChar" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="Q" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                      <font>
                                          <Font size="16.0" />
                                      </font>
@@ -154,7 +157,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar1131" alignment="TOP_LEFT" contentDisplay="CENTER" text="W" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar1131" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="W" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -168,7 +171,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar1212" alignment="TOP_LEFT" contentDisplay="CENTER" text="E" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar1212" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="E" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -182,7 +185,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar12" alignment="TOP_LEFT" contentDisplay="CENTER" text="R" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar12" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="R" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -196,7 +199,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar1345" alignment="TOP_LEFT" contentDisplay="CENTER" text="T" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar1345" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="T" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -214,7 +217,7 @@
                                     <Image url="@../style/space.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar14" alignment="TOP_LEFT" contentDisplay="CENTER" text="⇩" textFill="WHITE" translateX="20.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar14" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="⇩" textFill="WHITE" translateX="20.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -228,7 +231,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar1" alignment="TOP_LEFT" contentDisplay="CENTER" text="A" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar1" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="A" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -242,7 +245,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar11" alignment="TOP_LEFT" contentDisplay="CENTER" text="S" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar11" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="S" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -256,7 +259,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar111" alignment="TOP_LEFT" contentDisplay="CENTER" text="D" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar111" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="D" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -270,7 +273,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar121" alignment="TOP_LEFT" contentDisplay="CENTER" text="F" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar121" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="F" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -291,7 +294,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar113" alignment="TOP_LEFT" contentDisplay="CENTER" text="⇧" textFill="WHITE" translateX="20.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar113" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="⇧" textFill="WHITE" translateX="20.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -305,7 +308,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar114" alignment="TOP_LEFT" contentDisplay="CENTER" text="&lt; |" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar114" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="&lt; |" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -319,7 +322,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar11" alignment="TOP_LEFT" contentDisplay="CENTER" text="Y" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar11" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="Y" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -333,7 +336,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar111" alignment="TOP_LEFT" contentDisplay="CENTER" text="X" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar111" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="X" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -347,7 +350,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar1111" alignment="TOP_LEFT" contentDisplay="CENTER" text="C" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar1111" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="C" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -361,7 +364,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar1211" alignment="TOP_LEFT" contentDisplay="CENTER" text="V" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar1211" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="V" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -382,7 +385,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label alignment="TOP_LEFT" contentDisplay="CENTER" text="Strg" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="Strg" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -396,7 +399,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar1111" alignment="TOP_LEFT" contentDisplay="CENTER" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar1111" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -410,7 +413,7 @@
                                     <Image url="@../style/key.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar11111" alignment="TOP_LEFT" contentDisplay="CENTER" text="Alt" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar11111" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" text="Alt" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -424,7 +427,7 @@
                                     <Image url="@../style/space.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="keyChar12111" alignment="TOP_LEFT" contentDisplay="CENTER" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
+                              <Label fx:id="keyChar12111" alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="apm-key-label" textFill="WHITE" translateX="10.0" translateY="10.0" StackPane.alignment="TOP_LEFT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -437,10 +440,13 @@
             </VBox>
             <VBox fx:id="apm_mouseWrapper" alignment="TOP_CENTER">
                <children>
-                  <Label fx:id="apm_mouse" text="Mouse " textFill="WHITE">
+                  <Label fx:id="apm_mouse" alignment="TOP_LEFT" minWidth="104.0" styleClass="apm-main-label" text="Mouse " textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="20.0" />
-                     </font></Label>
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Label>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="214.0" fitWidth="172.0" pickOnBounds="true" styleClass="apm-img-mouse">

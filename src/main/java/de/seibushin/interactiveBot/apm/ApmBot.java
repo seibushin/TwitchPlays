@@ -29,6 +29,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.ColorInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -78,6 +79,8 @@ public class ApmBot implements Runnable {
     private Label apm_mouse;
     @FXML
     private Label apm;
+    @FXML
+    private VBox wrapper;
     @FXML
     private HBox apm_wrapper;
     @FXML
@@ -185,6 +188,20 @@ public class ApmBot implements Runnable {
                 });
             }
         }
+
+        // set background color
+        wrapper.setStyle("-fx-background-color: " + Config.getInstance().getApm_bg());
+
+        // set mainTextColor
+        wrapper.lookupAll(".apm-main-label").forEach(node -> {
+            Label label = (Label) node;
+            label.setStyle("-fx-text-fill: " + Config.getInstance().getApm_mainTextColor());
+        });
+
+        apm_wrapper.lookupAll(".apm-key-label").forEach(node -> {
+            Label label = (Label) node;
+            label.setStyle("-fx-text-fill: " + Config.getInstance().getApm_textColor());
+        });
 
         // recalc scene size
         stage.sizeToScene();

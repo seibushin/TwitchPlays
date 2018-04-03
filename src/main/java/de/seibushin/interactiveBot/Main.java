@@ -23,6 +23,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.types.GenericMessageEvent;
 
 public class Main extends Application {
     private final static String FXML_PATH = "/fxml/main.fxml";
@@ -50,7 +55,11 @@ public class Main extends Application {
     @FXML
     private TextField pointsPerDis;
     @FXML
-    private TextField speakCost;
+    private TextField soundBot_speakCost;
+    @FXML
+    private TextField soundBot_command;
+    @FXML
+    private ColorPicker soundBot_bg;
     @FXML
     private TextField oMeter_factor;
     @FXML
@@ -69,8 +78,10 @@ public class Main extends Application {
     private CheckBox apm_showKey;
     @FXML
     private CheckBox apm_showMouse;
-
-
+    @FXML
+    private ColorPicker apm_textColor;
+    @FXML
+    private ColorPicker apm_mainTextColor;
 
     public static void main(String[] args) {
         launch(args);
@@ -110,7 +121,9 @@ public class Main extends Application {
         channel.textProperty().bindBidirectional(Config.getInstance().channelProperty());
         pointsPerDis.textProperty().bindBidirectional(Config.getInstance().pointsPerDisProperty());
         disEveryMin.textProperty().bindBidirectional(Config.getInstance().disEveryMinProperty());
-        speakCost.textProperty().bindBidirectional(Config.getInstance().speakCostProperty());
+
+        soundBot_speakCost.textProperty().bindBidirectional(Config.getInstance().soundBot_speakCostProperty());
+        soundBot_bg.valueProperty().bindBidirectional(Config.getInstance().soundBot_bgProperty());
 
         oMeter_factor.textProperty().bindBidirectional(Config.getInstance().oMeter_factorProperty());
         oMeter_normSleep.textProperty().bindBidirectional(Config.getInstance().oMeter_normSleepProperty());
@@ -122,6 +135,8 @@ public class Main extends Application {
         apm_bg.valueProperty().bindBidirectional(Config.getInstance().apm_bgProperty());
         apm_showKey.selectedProperty().bindBidirectional(Config.getInstance().apm_showKeyProperty());
         apm_showMouse.selectedProperty().bindBidirectional(Config.getInstance().apm_showMouseProperty());
+        apm_textColor.valueProperty().bindBidirectional(Config.getInstance().apm_textColorProperty());
+        apm_mainTextColor.valueProperty().bindBidirectional(Config.getInstance().apm_mainTextColorProperty());
     }
 
     @FXML
@@ -173,6 +188,43 @@ public class Main extends Application {
         } else {
             SoundBot.getInstance().close();
         }
+    }
+
+    @FXML
+    private void soundBotCommand() {
+        // todo put into chatBot
+        String command = soundBot_command.getText();
+        //String[] parts = soundBot_command.getText().split("");
+
+
+        GenericMessageEvent event = new MessageEvent<PircBotX>(TwitchChatBot.bot, TwitchChatBot.bot.getUserChannelDao().getChannel("seibushin"), TwitchChatBot.bot.getUserChannelDao().getUser("seibushin"), command);
+        System.out.println(event);
+
+        TwitchChatBot.getInstance().onGenericMessage(event);
+
+        /*
+        switch (soundBot_command.getText()) {
+            case "!speak":
+                System.out.println("speak");
+                if (parts.length > 1) {
+                    SoundBot.getInstance().speak(event.getMessage().replaceAll(".*? (.*)", "$1"), "self");
+                }
+                break;
+            case "!sound":
+                if (SoundBot.getInstance().isRunning().get()) {
+                    System.out.println("sound");
+
+                    // add to queue
+                    // remove
+                    if (parts.length > 1) {
+                        SoundBot.getInstance().addToPlayList(parts[1], "self");
+                    }
+                }
+                break;
+        }
+        */
+
+
     }
 
     private void close() {
