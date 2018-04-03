@@ -1,48 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/gui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button mnemonicParsing="false" onAction="#startChatBot" styleClass="toggle" text="ChatBot">
-         <graphic>
-            <RadioButton fx:id="chatBotStatus" mnemonicParsing="false" styleClass="status" />
-         </graphic>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#startPointBot" styleClass="toggle" text="PointBot">
-         <graphic>
-            <RadioButton fx:id="pointBotStatus" mnemonicParsing="false" styleClass="status" />
-         </graphic>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#startLoL" styleClass="toggle" text="LoLGame">
-         <graphic>
-            <RadioButton fx:id="lolStatus" mnemonicParsing="false" styleClass="status" />
-         </graphic>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#startOMeter" styleClass="toggle" text="oMeter">
-         <graphic>
-            <RadioButton fx:id="oMeterStatus" mnemonicParsing="false" styleClass="status" />
-         </graphic>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#startSound" styleClass="toggle" text="SoundBot">
-         <graphic>
-            <RadioButton fx:id="soundBotStatus" mnemonicParsing="false" styleClass="status" />
-         </graphic>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#startAPMBot" styleClass="toggle" text="APMBot">
-         <graphic>
-            <RadioButton fx:id="APMBotStatus" mnemonicParsing="false" styleClass="status" />
-         </graphic>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#startAPMBot2" styleClass="toggle" text="APMBot 2.0">
-         <graphic>
-            <RadioButton fx:id="APMBot2Status" mnemonicParsing="false" styleClass="status" />
-         </graphic>
-      </Button>
-      <ListView fx:id="audio_queue" prefHeight="200.0" prefWidth="200.0" />
+      <VBox stylesheets="@../style/gui.css">
+         <children>
+            <Button mnemonicParsing="false" onAction="#startChatBot" styleClass="toggle" text="ChatBot">
+               <graphic>
+                  <RadioButton fx:id="chatBotStatus" disable="true" mnemonicParsing="false" styleClass="status" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#startPointBot" styleClass="toggle" text="PointBot">
+               <graphic>
+                  <RadioButton fx:id="pointBotStatus" disable="true" mnemonicParsing="false" styleClass="status" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#startOMeter" styleClass="toggle" text="oMeter">
+               <graphic>
+                  <RadioButton fx:id="oMeterStatus" disable="true" mnemonicParsing="false" styleClass="status" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#startSound" styleClass="toggle" text="SoundBot">
+               <graphic>
+                  <RadioButton fx:id="soundBotStatus" disable="true" mnemonicParsing="false" styleClass="status" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#startAPMBot" styleClass="toggle" text="ApmBot">
+               <graphic>
+                  <RadioButton fx:id="APMBotStatus" disable="true" mnemonicParsing="false" styleClass="status" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#startLoL" styleClass="toggle" text="LoLGame">
+               <graphic>
+                  <RadioButton fx:id="lolStatus" disable="true" mnemonicParsing="false" styleClass="status" />
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <TabPane tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="ChatBot">
+            <content>
+              <AnchorPane>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Twitch Channel" />
+                              <TextField fx:id="channel" />
+                              <Label contentDisplay="BOTTOM" text="oAuthKey" />
+                              <PasswordField fx:id="oAuth" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="PointBot">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label contentDisplay="BOTTOM" text="Distribute points every ___ minutes" />
+                              <TextField fx:id="disEveryMin" />
+                              <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" graphicTextGap="0.0" text="Points per distribution" />
+                              <TextField fx:id="pointsPerDis" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="oMeter">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Factor" />
+                              <TextField fx:id="oMeter_factor" />
+                              <Label text="Normalizer Sleep" />
+                              <TextField fx:id="oMeter_normSleep" />
+                              <Label text="Normalizer Factor" />
+                              <TextField fx:id="oMeter_normFactor" />
+                              <Label text="Normalizer min" />
+                              <TextField fx:id="oMeter_min" />
+                              <Label text="Normalizer max" />
+                              <TextField fx:id="oMeter_max" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="SoundBot">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Speak cost" />
+                              <TextField fx:id="speakCost" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="ApmBot">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Color" />
+                              <ColorPicker fx:id="apm_color" />
+                              <Label text="Background" />
+                              <ColorPicker fx:id="apm_bg" />
+                              <Label text="Show Keyboard" />
+                              <CheckBox fx:id="apm_showKey" mnemonicParsing="false" text="CheckBox" />
+                              <Label text="Show Mouse" />
+                              <CheckBox fx:id="apm_showMouse" mnemonicParsing="false" text="CheckBox" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
-</VBox>
+</HBox>

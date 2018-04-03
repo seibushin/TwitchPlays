@@ -42,3 +42,7 @@
 .status .radio .dot {
     -fx-background-color: transparent;
 }
+
+.status:disabled {
+    -fx-opacity: 1;
+}

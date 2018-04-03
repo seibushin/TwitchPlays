@@ -170,7 +170,6 @@ public class TwitchChatBot extends ListenerAdapter implements Runnable {
 
             int times = 0;
             for (String s : parts) {
-                System.out.println(s);
                 if (Words.neg.containsKey(s)) {
                     times--;
                 } else if (Words.pos.containsKey(s)) {
@@ -178,6 +177,7 @@ public class TwitchChatBot extends ListenerAdapter implements Runnable {
                 }
             }
 
+            System.out.println("oMeter change: " + times);
             OMeter.getInstance().update(times);
         }
     }
@@ -190,7 +190,7 @@ public class TwitchChatBot extends ListenerAdapter implements Runnable {
         bot.sendRaw().rawLineNow(String.format("PONG %s\r\n", event.getPingValue()));
     }
 
-    private void sendMessage(String message) {
+    public void sendMessage(String message) {
         bot.sendIRC().message("#" + CHANNEL, message);
     }
 

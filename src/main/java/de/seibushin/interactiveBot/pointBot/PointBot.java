@@ -7,6 +7,7 @@
 
 package de.seibushin.interactiveBot.pointBot;
 
+import de.seibushin.interactiveBot.Config;
 import de.seibushin.interactiveBot.helper.JSONParser;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -20,8 +21,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PointBot implements Runnable {
-    private static final long INTERVAL = 5; // minutes
+    private static final long INTERVAL = Config.getInstance().getDisEveryMin();
+    private static final int ADD_PER_INT = Config.getInstance().getPointsPerDis();
     private static final String CHANNEL = "seibushin";
+
     private static final String SAVEFILE = "res/points.txt";
     private static final String SPLITTER = ";";
 
@@ -131,12 +134,12 @@ public class PointBot implements Runnable {
             // get the viewers
             JSONArray viewers = json.getJSONObject("chatters").getJSONArray("viewers");
             for (int i = 0; i < viewers.length(); i++) {
-                addPointToViewer(viewers.getString(i), 1);
+                addPointToViewer(viewers.getString(i), ADD_PER_INT);
             }
 
             JSONArray mods = json.getJSONObject("chatters").getJSONArray("moderators");
             for (int i = 0; i < mods.length(); i++) {
-                addPointToViewer(mods.getString(i), 1);
+                addPointToViewer(mods.getString(i), ADD_PER_INT);
             }
 
             pointMap.forEach((s, integer) -> {

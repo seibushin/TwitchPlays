@@ -1,0 +1,13 @@
+channel=seibushin
+disEveryMin=5
+pointsPerDis=1
+speakCost=10
+oMeter_factor=5
+oMeter_normSleep=100
+oMeter_normFactor=0.005
+oMeter_max=8
+oMeter_min=0.025
+apm_color=0x669966ff
+apm_bg=0x99991f57
+apm_showKey=true
+apm_showMouse=true

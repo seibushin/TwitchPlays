@@ -7,9 +7,11 @@
 
 package de.seibushin.interactiveBot.soundBot;
 
+import de.seibushin.interactiveBot.Config;
 import de.seibushin.interactiveBot.pointBot.PointBot;
 import de.seibushin.interactiveBot.soundBot.model.Sound;
 import de.seibushin.interactiveBot.soundBot.model.Sounds;
+import de.seibushin.interactiveBot.twitch.TwitchChatBot;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -35,10 +37,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-@SuppressWarnings("Duplicates")
 public class SoundBot {
     private final static String FXML_PATH = "/fxml/soundBot.fxml";
     private static final String SOUND_BASE = "res/sounds/";
+    private static final int COST_SPEAK = Config.getInstance().getSpeakCost();
 
     private static SoundBot instance;
 
@@ -106,6 +108,8 @@ public class SoundBot {
                 PointBot.getInstance().addPointToViewer(user, -sound.getCost());
                 System.out.println("add to playlist " + soundName);
                 playList.add(sound);
+            } else {
+                TwitchChatBot.getInstance().sendMessage(user + " du hast " + points + " brauchst aber " + sound.getCost() + " Punkte!");
             }
         }
     }
@@ -182,15 +186,16 @@ public class SoundBot {
     }
 
     public void speak(String msg, String user) {
-        int cost = 10;
         int points = PointBot.getInstance().getPointsForViewer(user);
 
-        if (points >= cost) {
-            PointBot.getInstance().addPointToViewer(user, -cost);
+        if (points >= COST_SPEAK) {
+            PointBot.getInstance().addPointToViewer(user, -COST_SPEAK);
 
             setBubbleText(msg);
             say(msg, "de");
             //say(msg, "de");
+        } else {
+            TwitchChatBot.getInstance().sendMessage(user + " du hast " + points + " brauchst aber " + COST_SPEAK + " Punkte!");
         }
     }
 

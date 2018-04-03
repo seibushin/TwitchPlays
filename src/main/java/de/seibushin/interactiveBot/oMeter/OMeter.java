@@ -7,6 +7,7 @@
 
 package de.seibushin.interactiveBot.oMeter;
 
+import de.seibushin.interactiveBot.Config;
 import de.seibushin.interactiveBot.helper.GuiHelper;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -26,11 +27,11 @@ import java.io.IOException;
 public class OMeter {
     private static final String FXML_PATH = "/fxml/oMeter.fxml";
 
-    private static final double FACTOR = 5;
-    private static final int NORMALIZER_SLEEP = 100;
-    private static final double NORMALIZER_FACTOR = 0.005;
-    private static final double NORMALIZER_MIN = 0.025;
-    private static final int NORMALIZER_MAX = 8;
+    private static final double FACTOR = Config.getInstance().getoMeter_factor();
+    private static final int NORMALIZER_SLEEP = Config.getInstance().getoMeter_normSleep();
+    private static final double NORMALIZER_FACTOR = Config.getInstance().getoMeter_factor();
+    private static final double NORMALIZER_MIN = Config.getInstance().getoMeter_min();
+    private static final int NORMALIZER_MAX = Config.getInstance().getoMeter_max();
 
     private static OMeter instance;
     private Stage stage;
@@ -58,7 +59,7 @@ public class OMeter {
 
         stage.setTitle("SeiBot - OMeter");
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initStyle(StageStyle.UNDECORATED);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML_PATH));
@@ -74,11 +75,13 @@ public class OMeter {
             pointer.getTransforms().add(rotate);
 
             // addFade and drag
-            GuiHelper.addFade(hover);
             GuiHelper.addFade(controls);
+            /*
+            GuiHelper.addFade(hover);
 
             // check if this is ok
             new GuiHelper.DragStage(stage, drag);
+            */
 
             stage.setScene(scene);
         } catch (IOException e) {
@@ -86,7 +89,7 @@ public class OMeter {
         }
 
         stage.setOnCloseRequest(event -> {
-            System.out.println("close OMeter - onCloseRequest");
+            close();
         });
 
         stage.show();
@@ -115,6 +118,7 @@ public class OMeter {
      */
     public synchronized void start() {
         if (!running.get()) {
+            System.out.println("start oMeter");
             running.set(true);
 
             init();
@@ -185,7 +189,7 @@ public class OMeter {
      */
     @FXML
     private void increase() {
-        System.out.println("inc" + FACTOR);
+        System.out.println("oMeter change: " + FACTOR);
         update(FACTOR, false);
     }
 
@@ -194,13 +198,14 @@ public class OMeter {
      */
     @FXML
     private void decrease() {
-        System.out.println("dec" + FACTOR);
+        System.out.println("oMeter change: " + FACTOR);
         update(-FACTOR, false);
     }
 
     @FXML
     public synchronized void close() {
         if (running.get()) {
+            System.out.println("close oMeter");
             running.set(false);
 
             try {

@@ -7,7 +7,6 @@ package de.seibushin.interactiveBot;
  */
 
 import de.seibushin.interactiveBot.apm.ApmBot;
-import de.seibushin.interactiveBot.apm.ApmBot2;
 import de.seibushin.interactiveBot.lol.LolBot;
 import de.seibushin.interactiveBot.oMeter.OMeter;
 import de.seibushin.interactiveBot.pointBot.PointBot;
@@ -18,7 +17,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -39,25 +42,59 @@ public class Main extends Application {
     @FXML
     private RadioButton APMBot2Status;
 
+    // Config
+    @FXML
+    private TextField channel;
+    @FXML
+    private TextField disEveryMin;
+    @FXML
+    private TextField pointsPerDis;
+    @FXML
+    private TextField speakCost;
+    @FXML
+    private TextField oMeter_factor;
+    @FXML
+    private TextField oMeter_normSleep;
+    @FXML
+    private TextField oMeter_normFactor;
+    @FXML
+    private TextField oMeter_min;
+    @FXML
+    private TextField oMeter_max;
+    @FXML
+    private ColorPicker apm_color;
+    @FXML
+    private ColorPicker apm_bg;
+    @FXML
+    private CheckBox apm_showKey;
+    @FXML
+    private CheckBox apm_showMouse;
+
+
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("SeiBot v0.1");
-        stage.setResizable(false);
+        try {
+            stage.setTitle("SeiBot v0.1");
+            stage.setResizable(false);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML_PATH));
-        // use this class as controller
-        fxmlLoader.setController(this);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML_PATH));
+            // use this class as controller
+            fxmlLoader.setController(this);
 
-        Scene scene = new Scene(fxmlLoader.load());
+            Scene scene = new Scene(fxmlLoader.load());
 
-        // show stage
-        stage.setScene(scene);
-        stage.show();
-        stage.setOnCloseRequest(event -> close());
+            // show stage
+            stage.setScene(scene);
+            stage.show();
+            stage.setOnCloseRequest(event -> close());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -65,11 +102,26 @@ public class Main extends Application {
         chatBotStatus.selectedProperty().bind(TwitchChatBot.getInstance().isRunning());
         pointBotStatus.selectedProperty().bind(PointBot.getInstance().isRunning());
         APMBotStatus.selectedProperty().bind(ApmBot.getInstance().isRunning());
-        APMBot2Status.selectedProperty().bind(ApmBot2.getInstance().isRunning());
         soundBotStatus.selectedProperty().bind(SoundBot.getInstance().isRunning());
         oMeterStatus.selectedProperty().bind(OMeter.getInstance().isRunning());
-
         //lolStatus.selectedProperty().bind(PointBot.getInstance().isRunning());
+
+        // config bindings
+        channel.textProperty().bindBidirectional(Config.getInstance().channelProperty());
+        pointsPerDis.textProperty().bindBidirectional(Config.getInstance().pointsPerDisProperty());
+        disEveryMin.textProperty().bindBidirectional(Config.getInstance().disEveryMinProperty());
+        speakCost.textProperty().bindBidirectional(Config.getInstance().speakCostProperty());
+
+        oMeter_factor.textProperty().bindBidirectional(Config.getInstance().oMeter_factorProperty());
+        oMeter_normSleep.textProperty().bindBidirectional(Config.getInstance().oMeter_normSleepProperty());
+        oMeter_normFactor.textProperty().bindBidirectional(Config.getInstance().oMeter_normFactorProperty());
+        oMeter_min.textProperty().bindBidirectional(Config.getInstance().oMeter_minProperty());
+        oMeter_max.textProperty().bindBidirectional(Config.getInstance().oMeter_maxProperty());
+
+        apm_color.valueProperty().bindBidirectional(Config.getInstance().apm_colorProperty());
+        apm_bg.valueProperty().bindBidirectional(Config.getInstance().apm_bgProperty());
+        apm_showKey.selectedProperty().bindBidirectional(Config.getInstance().apm_showKeyProperty());
+        apm_showMouse.selectedProperty().bindBidirectional(Config.getInstance().apm_showMouseProperty());
     }
 
     @FXML
@@ -90,22 +142,12 @@ public class Main extends Application {
         }
     }
 
-
     @FXML
     private void startAPMBot() {
         if (!ApmBot.getInstance().isRunning().get()) {
             ApmBot.getInstance().start(true);
         } else {
             ApmBot.getInstance().close();
-        }
-    }
-
-    @FXML
-    private void startAPMBot2() {
-        if (!ApmBot2.getInstance().isRunning().get()) {
-            ApmBot2.getInstance().start();
-        } else {
-            ApmBot2.getInstance().close();
         }
     }
 
@@ -134,7 +176,7 @@ public class Main extends Application {
     }
 
     private void close() {
-
+        Config.getInstance().close();
         PointBot.getInstance().close();
 
         Platform.exit();
