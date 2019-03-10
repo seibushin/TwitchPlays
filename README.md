@@ -34,7 +34,7 @@ LoLGame allows your community to vote for a role and champ you should play. By s
 
 The community can now participate in the vote for your champ by typing `!pick annie` for example. The View will show the splash art of the most voted champ and additionally the next 5 in the ranking.
 
-![Image of LoLGame Pick](https://github.com/seibushin/TwitchPlays/blob/master/img/LoLGame_cham.png)
+![Image of LoLGame Pick](https://github.com/seibushin/TwitchPlays/blob/master/img/LoLGame_champ.png)
 
 ## Future Work
 
