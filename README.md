@@ -29,9 +29,14 @@ The ApmBot allows you to display your APM (actions per minute) by displaying a k
 
 ### LoLGame
 LoLGame allows your community to vote for a role and champ you should play. By sending a message with `!pick mid` the community can vote for you to play midlane. If you are ready to select a champ you simply click the lock symbol and wait for your community to decide what champ to play.
+
 ![Image of LoLGame Pick](https://github.com/seibushin/TwitchPlays/blob/master/img/LoLGame_pick.png)
+
 The community can now participate in the vote for your champ by typing `!pick annie` for example. The View will show the splash art of the most voted champ and additionally the next 5 in the ranking.
+
 ![Image of LoLGame Pick](https://github.com/seibushin/TwitchPlays/blob/master/img/LoLGame_cham.png)
+
+## Future Work
 
 ### Features in development or experimental features
 #### Press for me
