@@ -7,6 +7,7 @@ package de.seibushin.interactiveBot;
  */
 
 import de.seibushin.interactiveBot.apm.ApmBot;
+import de.seibushin.interactiveBot.game.Game;
 import de.seibushin.interactiveBot.lol.LolBot;
 import de.seibushin.interactiveBot.oMeter.OMeter;
 import de.seibushin.interactiveBot.pointBot.PointBot;
@@ -168,7 +169,8 @@ public class Main extends Application {
 
     @FXML
     private void startLoL() {
-        LolBot.getInstance().next();
+        //LolBot.getInstance().next();
+        Game.getInstance().start();
     }
 
     @FXML

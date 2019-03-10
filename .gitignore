@@ -1,7 +1,11 @@
 .gradle
 .idea
-gradle
-gradlew
-gradlew.bat
+out
+build
+*.iml
+
 log
 psd
+layout
+images
+build
